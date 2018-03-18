@@ -1,0 +1,33 @@
+<%= stylesheet_link_tag "application" %>
+
+<div class="container">
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Photo</th>
+        <th>content</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @albums.each do |album| %>
+        <tr>
+          <td><%= image_tag album.image.url %></td>
+          <td style="font-size:1.5rem; word-wrap:break-word;"><%= album.content %></td>
+          <td><%= album.latitude %></td>
+          <td><%= album.longitude %></td>
+          <td>
+              <%= button_to "削除", album_path(album.id), method: :delete, data: { confirm: "PHOTOを削除します" } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<button type="button" class="btn pull-right btn-lg btn-default">
+  <%= link_to 'Back', new_album_path(place_id: @albums.last.place_id ), method: :get %>
+</button>
+</div>

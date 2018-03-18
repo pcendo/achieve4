@@ -1,0 +1,49 @@
+<%= stylesheet_link_tag "application" %>
+
+<div class="container">
+
+<p>利用者：詳細ボタンで行楽地の地図へ、お気に入りボタンでお気に入りに登録<br>
+    作者：編集ボタンで行楽地に写真を追加、削除ボタンで行楽地を削除</p>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <td>User</td>
+        <td>Name</td>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Address</th>
+        <th></th>
+        <th>利用者/作者メニュー</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @places.each do |place| %>
+      <% @user = User.find(place.user_id) %>
+        <tr>
+          <td><%= image_tag @user.image.thumb.url %></td>
+          <td><%= place.name %></td>
+          <td><%= place.latitude %></td>
+          <td><%= place.longitude %></td>
+          <td><%= place.address %></td>
+          <td>
+            <% if place.user_id == current_user.id %>
+              <%= button_to "編集", new_album_path, params: { place_id: place.id }, method: :get %>
+            <% else %>
+              <%= button_to "詳細", list_albums_path, params: { place_id: place.id }, method: :get %>
+            <% end %>
+          </td>
+          <td>
+            <% if place.user_id == current_user.id %>
+              <%= button_to "削除", place_path(place.id), method: :delete, data: { confirm: "#{place.name} の位置情報を削除します" } %>
+            <% elsif current_user.favorites.find_by(place_id: place.id).present? %>
+            <% else %>
+              <%= button_to "お気に入り", favorites_path(place_id: place.id), method: :post %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

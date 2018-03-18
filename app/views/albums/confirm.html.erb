@@ -1,0 +1,30 @@
+<%= stylesheet_link_tag "application" %>
+
+<div class="container">
+
+  <div class="form-horizontal" >
+
+    <div class="form-group">
+      <h2>以下の内容で、登録する。</h2>
+    </div>
+
+    <%= form_with(model: @album, url: albums_path, local: true) do |form| %>
+
+      <div class="form-group">
+        <%= form.hidden_field :image %>
+        <%= hidden_field_tag :"cache[image]", @album.image.cache_name %>
+        <%= form.hidden_field :content %>
+        <%= form.hidden_field :place_id %>
+        <%= form.hidden_field :latitude %>
+        <%= form.hidden_field :longitude %>
+
+        <%= image_tag @album.image.url %>
+      </div>
+      <div class="form-group">
+        <p>コメント：</p>
+        <p style="font-size:1.5rem; word-wrap:break-word;"><%= @album.content %></p>
+      </div>
+      <div class="form-group">
+        <%= form.submit "登録する", :class => "btn btn-primary btn-block" %>
+      </div>
+    <% end %>

@@ -1,0 +1,117 @@
+<div class="container">
+
+<h3>地図をクリックして写真を登録しよう、写真の削除はマーカーをクリック</h3><br>
+
+  <div class="map_container">
+    <div id="map" class="map_canvas"></div>
+  </div>
+
+    <div id="form" style="display:none">
+      <%= form_with(model: Album.new, url: confirm_albums_path, local: true ) do |form| %>
+        <%= form.label t('label.photo') %><br>
+        <%= form.file_field :image, id: :album_image %><br>
+        <%= form.hidden_field :image_cache %>
+        <%= form.label t('label.content') %><br>
+        <%= form.text_field :content %><br><br>
+        <%= form.hidden_field :place_id, :value => @place.id %>
+        <%= form.hidden_field :latitude, :id => "lat" %>
+        <%= form.hidden_field :longitude, :id => "lng" %>
+        <%= form.submit "PHOTOを登録する‼", :class => "btn btn-primary" %>
+      <% end %>
+    </div>
+
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyCnNmcjEEeGHyWaIxAPPLkZAu8Wvv1uvgw&callback=initMap" defer></script>
+
+    <script>
+      var map;
+      var newmarker;
+      var newinfowindow;
+      var marker = [];
+      var infowindow = [];
+
+      function initMap() {
+        var <%= @place.name %> = {lat: <%= @place.latitude %>, lng: <%= @place.longitude %>};
+        var openedInfowindow = '';
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: <%= @place.name %>,
+          zoom: 15
+        });
+
+        newinfowindow = new google.maps.InfoWindow({
+          content: document.getElementById('form')
+        });
+
+        google.maps.event.addListener(map, 'click', function(event) {
+          newmarker = new google.maps.Marker({
+            icon: 'markers/grn-pushpin.png',
+            position: event.latLng,
+            map: map
+          });
+
+            newinfowindow.open(map, newmarker);
+            document.getElementById('form').style.display="block";
+            set_latlng_to_input(event);
+        });
+
+        var lat = $("#lat");
+        var lng = $("#lng");
+
+        var set_latlng_to_input = function(event){
+          lat.val(event.latLng.lat());
+          lng.val(event.latLng.lng());
+        }
+
+
+        var data = <%=raw @hash.to_json %>;
+        for (var i = 0; i < data.length; i++) {
+          markerLatLng = {lat: data[i]['lat'], lng: data[i]['lng']};
+          marker[i] = new google.maps.Marker({
+            icon: 'markers/blue-pushpin.png',
+            position: markerLatLng,
+            animation: google.maps.Animation.DROP,
+            map: map
+          });
+
+          var content = '<div class="info"><img src="' + data[i].picture.url + '"><br><p>'
+                         + data[i].title + '</p></div><br><br>'
+                         + '<form method="get" action="/albums">'
+                         + '<input type="hidden" name="place_id" value="'
+                         + <%= @place.id %>
+                         + '"><input type="submit" value="編集"></form>';
+          infowindow[i] = new google.maps.InfoWindow({
+            content: content,
+            maxWidth: 400
+          });
+
+          markerClick(i);
+          infowindow[i].addListener('closeclick', function() {
+          openedInfowindow = '';
+          });
+
+        }
+
+
+        function markerClick(n) {
+          google.maps.event.addListener( marker[n], 'click', function(event) {
+            if (openedInfowindow !== infowindow[n]) {
+              if (openedInfowindow) {
+                openedInfowindow.close();
+              }
+            openedInfowindow = infowindow[n];
+            infowindow[n].open(map, marker[n]);
+            }
+          });
+        }
+
+      }
+
+      function doNothing () {
+      }
+      
+    </script>
+
+<button type="button" class="btn pull-right btn-lg btn-default">
+  <%= link_to 'Back', places_path %>
+</button>
+
+</div>

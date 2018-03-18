@@ -1,0 +1,42 @@
+  <h2>ユーザ情報を修正する</h2>
+
+<%= form_with(model: @user, local: true ) do |f| %>  
+
+<div class="form-group">
+  <%= f.label :name %>
+  <div>
+    <%= f.text_field :name, :class => "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :email %>
+  <div>
+    <%= f.email_field :email, :class => "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :password %>
+  <div>
+  <%= f.password_field :password, :class => "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :password_confirmation %>
+  <div>
+    <%= f.password_field :password_confirmation, :class => "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :image %>
+  <div>
+    <%= f.file_field :image, id: :user_image, :class => "form-control-file" %>
+    <%= f.hidden_field :image_cache %>
+  </div>
+</div>
+<div class="form-group">
+    <%= f.submit "Create my account", :class => "btn btn-success btn-block" %>
+</div>
+<% end %>
+
+
+<%= button_to '退会する', user_path(user.id), method: :delete ,data: { confirm: '本当に退会していいですか？' } %>

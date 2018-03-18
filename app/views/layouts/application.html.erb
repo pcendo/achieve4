@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Takashi Endo">
+    <%= favicon_link_tag('favicon.ico') %>
+
+    <title>Scrapbooks</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+    <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script>
+  </head>
+
+  <body>
+
+    <header>
+      <nav class="navbar navbar-default" style="border: 2px solid #dcdcdc" >
+        <div class="container" >
+          <div class = "zooming" >
+            <%= link_to image_tag("home.png", :size => "40x40" ), root_path, class: "tops" %>
+            <%= link_to image_tag("scrapbooks.jpg", :size => "150x30" ), root_path, class: "navbar-brand" %>
+            <div class="pull-right">
+              <% if logged_in? %>
+                <%= link_to "Sign out", session_path(current_user.id), method: :delete, class: "btn btn-danger navbar-btn" %>
+              <% else %>
+                <%= link_to "Sign in", new_session_path, method: :get, class: "btn btn-primary navbar-btn" %>
+              <% end %>
+              <%= link_to "Sign up", new_user_path, class: "btn btn-success navbar-btn" %>
+            </div>
+          </div>
+        </div>
+      </nav>
+    
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+      <script>
+        $(function() {
+          $('a').on('mouseenter', function() {
+            $(this).css('color', 'blue');
+          })
+          .on('mouseleave', function(){
+            $(this).css('color', 'white');
+          });
+        });
+      </script>
+    </header>
+
+    <%= yield %>
+    
+    <footer>    
+      <nav class="navbar fixed-bottom", style="border: 2px solid #dcdcdc" >
+        <div class="container" >
+          <div class = "zooming" >
+
+
+                <%= link_to image_tag("map.png", :size => "40x40" ), places_path, class: "image maps" %>
+                <%= link_to image_tag("plus.png", :size => "40x40" ), new_place_path, class: "image plus"  %>
+                <%= link_to image_tag("heart.png", :size => "40x40" ), favorites_path, class: "image heart"  %>
+                <%= link_to image_tag("user.png", :size => "40x40" ), "#", class: "image acount"  %>
+                <p class="author">Copyright Takashi Endo</p>
+          </div>
+        </div>
+      </nav>
+
+    </footer>
+
+  </body>
+</html>

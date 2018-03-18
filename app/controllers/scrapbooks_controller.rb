@@ -1,0 +1,2 @@
+class ScrapbooksController < ApplicationController
+end

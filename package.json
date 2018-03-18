@@ -1,0 +1,12 @@
+{
+  "name": "scrapbooks",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "3",
+    "jquery": "^3.3.1"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Takashi Endo <endo@nttpc.co.jp>",
+  "license": "MIT"
+}
