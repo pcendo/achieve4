@@ -9,8 +9,8 @@
         <tr>
           <th class="col-sm-7 col-md-4", style="font-size:1.5rem; text-align:center;">Photo</th>
           <th class="col-sm-4 col-md-3", style="font-size:1.5rem; text-align:center;">content</th>
-          <th class="col-sm-0 col-md-2 hidden-xs", style="font-size:1.5rem; text-align:center;">Latitude</th>
-          <th class="col-sm-0 col-md-2 hidden-xs", style="font-size:1.5rem; text-align:center;">Longitude</th>
+          <th class="col-md-2 hidden-xs", style="font-size:1.5rem; text-align:center;">Latitude</th>
+          <th class="col-md-2 hidden-xs", style="font-size:1.5rem; text-align:center;">Longitude</th>
         </tr>
       </div>
     </thead>
@@ -21,8 +21,8 @@
           <tr>
             <td class="col-sm-7 col-md-4"><%= image_tag album.image.url %></td>
             <td class="col-sm-4 col-md-3" style="font-size:1.5rem; word-wrap:break-word;"><%= album.content %></td>
-            <td class="col-sm-0 col-md-2 hidden-xs"><%= album.latitude %></td>
-            <td class="col-sm-0 col-md-2 hidden-xs"><%= album.longitude %></td>
+            <td class="col-md-2 hidden-xs"><%= album.latitude %></td>
+            <td class="col-md-2 hidden-xs"><%= album.longitude %></td>
             <td class="col-sm-1 col-md-1">
                 <%= button_to "削除", album_path(album.id), method: :delete, data: { confirm: "PHOTOを削除します" } %>
             </td>
