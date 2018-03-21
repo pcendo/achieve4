@@ -25,7 +25,13 @@
         <% @places.each do |place| %>
         <% @user = User.find(place.user_id) %>
           <tr>
-          <td class="col-sm-4 col-md-1"><%= image_tag @user.image.thumb.url %></td>
+            <td class="col-sm-4 col-md-1">
+              <% if @user.image.thumb.url == nil %>
+                <%= image_tag "no_image.png" %>
+              <% else %>
+                <%= image_tag @user.image.thumb.url %>
+              <% end %>  
+            </td>
             <td class="col-sm-4 col-md-2"><%= place.name %></td>
             <td class="col-md-2 hidden-xs"><%= place.latitude %></td>
             <td class="col-md-2 hidden-xs"><%= place.longitude %></td>
