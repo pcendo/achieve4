@@ -9,7 +9,7 @@
     <div id="form" style="display:none">
       <%= form_with(model: Album.new, url: confirm_albums_path, local: true ) do |form| %>
         <%= form.label t('label.photo') %><br>
-        <%= form.file_field :image, id: :album_image %><br>
+        <%= form.file_field :image, id: :album_image, :required => true %><br>
         <%= form.hidden_field :image_cache %>
         <%= form.label t('label.content') %><br>
         <%= form.text_field :content %><br><br>
@@ -20,7 +20,8 @@
       <% end %>
     </div>
 
-    <script src="https://maps.google.com/maps/api/js?key=AIzaSyCnNmcjEEeGHyWaIxAPPLkZAu8Wvv1uvgw&callback=initMap" defer></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnNmcjEEeGHyWaIxAPPLkZAu8Wvv1uvgw&libraries=places,geometry&callback=initMap" ></script>
 
     <script>
       var map;
@@ -30,10 +31,10 @@
       var infowindow = [];
 
       function initMap() {
-        var <%= @place.name %> = {lat: <%= @place.latitude %>, lng: <%= @place.longitude %>};
+        var sight = {lat: <%= @place.latitude %>, lng: <%= @place.longitude %>};
         var openedInfowindow = '';
         map = new google.maps.Map(document.getElementById('map'), {
-          center: <%= @place.name %>,
+          center: sight,
           zoom: 15
         });
 
@@ -61,7 +62,6 @@
           lng.val(event.latLng.lng());
         }
 
-
         var data = <%=raw @hash.to_json %>;
         for (var i = 0; i < data.length; i++) {
           markerLatLng = {lat: data[i]['lat'], lng: data[i]['lng']};
@@ -71,7 +71,7 @@
             animation: google.maps.Animation.DROP,
             map: map
           });
-
+          
           var content = '<div class="info"><img src="' + data[i].picture.url + '"><br><p>'
                          + data[i].title + '</p></div><br><br>'
                          + '<form method="get" action="/albums">'
@@ -90,7 +90,6 @@
 
         }
 
-
         function markerClick(n) {
           google.maps.event.addListener( marker[n], 'click', function(event) {
             if (openedInfowindow !== infowindow[n]) {
@@ -105,10 +104,8 @@
 
       }
 
-      function doNothing () {
-      }
-      
     </script>
+
 
 <button type="button" class="btn pull-right btn-lg btn-default">
   <%= link_to 'Back', places_path %>

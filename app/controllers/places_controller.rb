@@ -35,9 +35,9 @@ class PlacesController < ApplicationController
 
       if @place.save
 #        PlaceMailer.place_mail(@place).deliver
-        redirect_to places_path, notice: "#{@place.name} の位置情報を保存しました"
+        redirect_to new_album_path( place_id: @place.id )
       else
-        render 'index', notice: "#{@place.name} の位置情報を保存できませんでした"
+        render 'new', notice: "#{@place.name} の位置情報を保存できませんでした"
       end
     end
     

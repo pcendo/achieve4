@@ -1,5 +1,7 @@
 <%= stylesheet_link_tag "application" %>
 
+<div class="container">
+
     <script>var GOOGLE_API_KEY="#{ENV['GOOGLE_API_KEY']}"</script>
     <%= javascript_include_tag src="//maps.google.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&libraries=places,geometry" %>
 
@@ -19,7 +21,7 @@
 
   <%= form_tag list_places_path, :role =>"form", :method => :get do %>
     <div class="form-group">
-      <%= text_field_tag :search, params[:search], { :class => "form-control", :required => true, } %>
+      <%= text_field_tag :search, params[:search], :class => "form-control", :required => true %>
       <%= button_tag( {:type => "submit", :name => nil, :class => "btn btn-primary" }) do %>
         <span class="glyphicon glyphicon-search">検索</span>
       <% end %>
@@ -33,3 +35,4 @@
   <div class="form-group">
     <%= link_to "行楽地一覧画面にもどる", places_path, :class => "btn btn-success btn-block" %>
   </div>
+</div>

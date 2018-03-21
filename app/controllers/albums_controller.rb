@@ -32,7 +32,7 @@ class AlbumsController < ApplicationController
 #          AlbumMailer.album_mail(@album).deliver
           redirect_to :action => "new", :place_id => @album.place_id
         else
-          render 'new'
+          render 'new', notice: "PHOTOを選択してください‼"
         end
     end
     

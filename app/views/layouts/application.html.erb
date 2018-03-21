@@ -21,9 +21,11 @@
 
     <header>
       <nav class="navbar navbar-default" style="border: 2px solid #dcdcdc" >
-        <div class="container" >
+
           <div class = "zooming" >
-            <%= link_to image_tag("home.png", :size => "40x40" ), root_path, class: "tops" %>
+            <%= link_to image_tag("map.png", :size => "40x40" ), places_path, class: "image maps" %>
+            <%= link_to image_tag("plus.png", :size => "40x40" ), new_place_path, class: "image plus"  %>
+            <%= link_to image_tag("open_heart.png", :size => "40x40" ), favorites_path, class: "image heart"  %>
             <%= link_to image_tag("scrapbooks.jpg", :size => "150x30" ), root_path, class: "navbar-brand" %>
             <div class="pull-right">
               <% if logged_in? %>
@@ -34,7 +36,7 @@
               <%= link_to "Sign up", new_user_path, class: "btn btn-success navbar-btn" %>
             </div>
           </div>
-        </div>
+
       </nav>
     
       <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
@@ -54,19 +56,8 @@
     
     <footer>    
       <nav class="navbar fixed-bottom", style="border: 2px solid #dcdcdc" >
-        <div class="container" >
-          <div class = "zooming" >
-
-
-                <%= link_to image_tag("map.png", :size => "40x40" ), places_path, class: "image maps" %>
-                <%= link_to image_tag("plus.png", :size => "40x40" ), new_place_path, class: "image plus"  %>
-                <%= link_to image_tag("heart.png", :size => "40x40" ), favorites_path, class: "image heart"  %>
-                <%= link_to image_tag("user.png", :size => "40x40" ), "#", class: "image acount"  %>
-                <p class="author">Copyright Takashi Endo</p>
-          </div>
-        </div>
+        <p class="author"><br>Copyright Takashi Endo</p>
       </nav>
-
     </footer>
 
   </body>
