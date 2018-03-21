@@ -16,17 +16,16 @@
           <th class="col-md-2 hidden-xs", style="font-size:1.5rem; text-align:center;">Longitude</th>
           <th class="col-md-3 hidden-xs", style="font-size:1.5rem; text-align:center;">Address</th>
           <th class="col-sm-2 col-md-1", style="font-size:1.5rem; text-align:center;">メニュー</th>
-          <th class="col-sm-2 col-md-1", style="font-size:1.5rem; text-align:center;"></th>
+          <th class="col-sm-2 col-md-1", style="font-size:1.5rem; text-align:center;">""</th>
         </tr>
       </div>
     </thead>
-
     <tbody>
       <div class="row">
         <% @places.each do |place| %>
         <% @user = User.find(place.user_id) %>
           <tr>
-            <td class="col-sm-4 col-md-1"><%= image_tag @user.image.thumb.url %></td>
+          <td class="col-sm-4 col-md-1"><%= image_tag @user.image.thumb.url %></td>
             <td class="col-sm-4 col-md-2"><%= place.name %></td>
             <td class="col-md-2 hidden-xs"><%= place.latitude %></td>
             <td class="col-md-2 hidden-xs"><%= place.longitude %></td>
