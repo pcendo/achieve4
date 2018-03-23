@@ -1,7 +1,5 @@
 <%= stylesheet_link_tag "application" %>
 
-<div class="container">
-
     <script>var GOOGLE_API_KEY="#{ENV['GOOGLE_API_KEY']}"</script>
     <%= javascript_include_tag src="//maps.google.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&libraries=places,geometry" %>
 
@@ -35,4 +33,3 @@
   <div class="form-group">
     <%= link_to "行楽地一覧画面にもどる", places_path, :class => "btn btn-success btn-block" %>
   </div>
-</div>

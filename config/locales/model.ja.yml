@@ -1,14 +1,23 @@
 ja:
   activerecord:
     models:
-      blog: "ブログ"
+      album: "写真"
+      place: "行楽地"
       user: "ユーザー"
     attributes:
-      blog:
-        title: "タイトル"
-        content: "内容"
+      album:
+        image: "写真"
+        content: "コメント"
+        latitude: "緯度"
+        longitude: "経度"
+      place:
+        name: "地名"
+        address: "住所"
+        latitude: "緯度"
+        longitude: "経度"
+        start_date: "初日"
+        last_date: "最終日"
       user:
-        title: "タイトル"
         name: "名前"
         email: "メールアドレス"
         current_password: "現在のパスワード"

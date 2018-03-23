@@ -126,66 +126,6 @@ text-align:center;
   position: absolute;
 }
 
-.maps{
-position:relative;
-}
-.maps:hover:after{
-content:"一覧";
-display:block;
-position:absolute;
-font-size:12px;
-bottom:10px;
-left:30px;
-width:100%;
-height:30px;
-text-align:center;
-}
-
-.plus{
-position:relative;
-}
-.plus:hover:after{
-content:"新規登録";
-display:block;
-position:absolute;
-font-size:12px;
-bottom:10px;
-left:30px;
-width:100%;
-height:30px;
-text-align:center;
-}
-
-.heart{
-position:relative;
-}
-.heart:hover:after{
-content:"お気に入り";
-display:block;
-position:absolute;
-font-size:12px;
-bottom:10px;
-left:30px;
-width:100%;
-height:30px;
-text-align:center;
-}
-
-.acount{
-position:relative;
-}
-.acount:hover:after{
-content:"アカウント";
-display:block;
-position:absolute;
-font-size:12px;
-bottom:10px;
-left:30px;
-width:100%;
-height:30px;
-text-align:center;
-}
-
 .author{
   width: 100%;
   font-size: 1.5rem;
@@ -200,4 +140,10 @@ height:100%;
 .info p {
 margin: 0;
 font-size: 1em;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
