@@ -68,7 +68,7 @@
 }
 
 .navbar {
-  margin-top: 20px;
+  margin-top: 0px;
   border-radius: 0;
   border: none;
   background-color: #003355;
@@ -98,6 +98,7 @@
   max-width: 1050px;
   width: 100%;
   min-height: 500px;
+  height: 100%;
 }
 
 .flow {
@@ -143,7 +144,7 @@ font-size: 1em;
 }
 
 #footer {
-    position: fixed;
+    position: relative;
     bottom: 0;
     width: 100%;
 }
