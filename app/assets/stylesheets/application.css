@@ -99,6 +99,8 @@
   width: 100%;
   min-height: 500px;
   height: 100%;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .flow {
