@@ -23,6 +23,8 @@
           zoom: 15
         });
 
+        setZoom(map, data);
+
         var data = <%=raw @hash.to_json %>;
         for (var i = 0; i < data.length; i++) {
           markerLatLng = {lat: data[i]['lat'], lng: data[i]['lng']};
@@ -60,6 +62,19 @@
           });
         }
 
+      }
+
+      function setZoom(map, data) {
+	      var boundbox = new google.maps.LatLngBounds();
+	      var data = <%=raw @hash.to_json %>;
+	      for ( var i = 0; i < data.length; i++ )
+      	{
+      	  boundbox.extend(new google.maps.LatLng(data[i]['lat'], data[i]['lng']));
+      	}
+      	if (data.length > 1){
+        	map.setCenter(boundbox.getCenter());
+        	map.fitBounds(boundbox);
+      	}
       }
 
     </script>

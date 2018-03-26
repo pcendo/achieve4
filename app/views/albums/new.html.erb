@@ -38,6 +38,8 @@
           zoom: 15
         });
 
+        setZoom(map, data);
+
         newinfowindow = new google.maps.InfoWindow({
           content: document.getElementById('form')
         });
@@ -63,32 +65,31 @@
         }
 
         var data = <%=raw @hash.to_json %>;
-        for (var i = 0; i < data.length; i++) {
-          markerLatLng = {lat: data[i]['lat'], lng: data[i]['lng']};
-          marker[i] = new google.maps.Marker({
-            icon: 'markers/blue-pushpin.png',
-            position: markerLatLng,
-            animation: google.maps.Animation.DROP,
-            map: map
-          });
-          
-          var content = '<div class="info"><img src="' + data[i].picture.url + '"><br><p>'
-                         + data[i].title + '</p></div><br><br>'
-                         + '<form method="get" action="/albums">'
-                         + '<input type="hidden" name="place_id" value="'
-                         + <%= @place.id %>
-                         + '"><input type="submit" value="削除"></form>';
-          infowindow[i] = new google.maps.InfoWindow({
-            content: content,
-            maxWidth: 400
-          });
+          for (var i = 0; i < data.length; i++) {
+            markerLatLng = {lat: data[i]['lat'], lng: data[i]['lng']};
+            marker[i] = new google.maps.Marker({
+              icon: 'markers/blue-pushpin.png',
+              position: markerLatLng,
+              animation: google.maps.Animation.DROP,
+              map: map
+            });
 
-          markerClick(i);
-          infowindow[i].addListener('closeclick', function() {
-          openedInfowindow = '';
-          });
+            var content = '<div class="info"><img src="' + data[i].picture.url + '"><br><p>'
+                           + data[i].title + '</p></div><br><br>'
+                           + '<form method="get" action="/albums">'
+                           + '<input type="hidden" name="place_id" value="'
+                           + <%= @place.id %>
+                           + '"><input type="submit" value="削除"></form>';
+            infowindow[i] = new google.maps.InfoWindow({
+              content: content,
+              maxWidth: 400
+            });
 
-        }
+            markerClick(i);
+            infowindow[i].addListener('closeclick', function() {
+            openedInfowindow = '';
+            });
+          }
 
         function markerClick(n) {
           google.maps.event.addListener( marker[n], 'click', function(event) {
@@ -102,6 +103,19 @@
           });
         }
 
+      }
+
+      function setZoom(map, data) {
+	      var boundbox = new google.maps.LatLngBounds();
+	      var data = <%=raw @hash.to_json %>;
+	      for ( var i = 0; i < data.length; i++ )
+      	{
+      	  boundbox.extend(new google.maps.LatLng(data[i]['lat'], data[i]['lng']));
+      	}
+      	if (data.length > 1){
+        	map.setCenter(boundbox.getCenter());
+        	map.fitBounds(boundbox);
+      	}
       }
 
     </script>
