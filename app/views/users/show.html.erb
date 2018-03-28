@@ -14,7 +14,7 @@
     </div>  
     <div class="form-group">
       <% if @user.image.thumb.url == nil %>
-        <%= image_tag "no_image.png" %>
+        <%= image_tag "no_image.png", :size => "50x50" %>
       <% else %>
         <%= image_tag @user.image.thumb.url %>
       <% end %>

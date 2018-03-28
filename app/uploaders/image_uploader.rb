@@ -31,7 +31,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Create different versions of your uploaded files:
   
   process :fix_exif_rotation
-  process resize_to_fit: [300, 200]
+  process resize_to_fit: [300, nil]
   
   version :thumb do
     process resize_to_fit: [50, nil]
