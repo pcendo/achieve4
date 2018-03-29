@@ -6,7 +6,7 @@ class PlacesController < ApplicationController
     before_action :place_params, only: [:create]
 
     def index
-        @places = Place.all
+        @places = Place.all.order(id: :desc)
     end
     
     def new
