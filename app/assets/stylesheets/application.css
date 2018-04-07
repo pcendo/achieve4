@@ -16,11 +16,13 @@
  */
 
 .top {
+  height: 85vh;
   background-image: url("sight.png");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  background-clip: content-box;
+  background-attachment: fixed;
+  background-clip: padding-box;
  }
 
 .top div{

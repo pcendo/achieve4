@@ -36,7 +36,11 @@
           });
 
           var content = '<div class="info"><img src="' + data[i].picture.url + '"><br><p>'
-                         + data[i].title + '</p></div>';
+                         + data[i].title + '</p></div><br><br>'
+                         + '<form method="get" action="/albums/index2">'
+                         + '<input type="hidden" name="place_id" value="'
+                         + <%= @place.id %>
+                         + '"><input type="submit" value="一覧"></form>';
           infowindow[i] = new google.maps.InfoWindow({
             content: content,
             maxWidth: 400

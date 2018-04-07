@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       post :confirm
       get  :list
       get  :list2
+      get  :index2
+      get  :index3
     end
   end
 

@@ -45,6 +45,14 @@ class AlbumsController < ApplicationController
         end
     end
 
+    def index2
+        @albums = Album.where(place_id: params[:place_id])
+    end
+
+    def index3
+        @albums = Album.where(place_id: params[:place_id])
+    end
+
     def destroy
         @album.destroy
         redirect_to :action => "index", :place_id => @album.place_id
