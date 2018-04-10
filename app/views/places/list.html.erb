@@ -2,6 +2,8 @@
 
     <script>var GOOGLE_API_KEY="#{ENV['GOOGLE_API_KEY']}"</script>
     <%= javascript_include_tag src="//maps.google.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&libraries=places,geometry" %>
+    <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+    <script src="//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js" type='text/javascript'></script>
 
 <div class="container">
 <h3>行楽地は見つかったかな?</h3>
@@ -42,7 +44,6 @@
       handler.bounds.extendWith(markers);
       handler.fitMapToBounds();
       handler.getMap().setZoom(15);
-      handler.map.centerOn(marker);
     });
   </script>
 
