@@ -103,6 +103,8 @@
           });
         }
 
+        google.maps.event.addDomListener( window, 'load', initMap );
+
       }
 
       function setZoom(map, data) {
@@ -117,8 +119,6 @@
         	map.fitBounds(boundbox);
       	}
       }
-
-      google.maps.event.addDomListener( window, 'load', initMap );
 
     </script>
 
