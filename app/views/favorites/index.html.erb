@@ -7,12 +7,13 @@
       <thead>
         <div class="row">
           <tr>
+            <th class="col-sm-4 col-md-1", style="font-size:1.5rem; text-align:center;">作者</th>
             <th class="col-sm-4 col-md-2", style="font-size:1.5rem; text-align:center;">Name</th>
             <th class="col-md-2 hidden-xs", style="font-size:1.5rem; text-align:center;">Latitude</th>
             <th class="col-md-2 hidden-xs", style="font-size:1.5rem; text-align:center;">Longitude</th>
             <th class="col-md-3 hidden-xs", style="font-size:1.5rem; text-align:center;">Address</th>
             <th class="col-sm-2 col-md-1", style="font-size:1.5rem; text-align:center;">メニュー</th>
-            <th class="col-sm-2 col-md-1", style="font-size:1.5rem; text-align:center;"></th>
+            <th class="col-sm-2 col-md-1", style="font-size:1.5rem; text-align:center;">""</th>
           </tr>
         </div>
       </thead>
@@ -20,7 +21,15 @@
       <tbody>
         <div class="row">
         <% @favorites_places.each do |place| %>
+        <% @user = User.find(place.user_id) %>
           <tr>
+            <td class="col-sm-4 col-md-1">
+              <% if @user.image.thumb.url == nil %>
+                <%= image_tag "no_image.png", :size => "50x50" %>
+              <% else %>
+                <%= image_tag @user.image.thumb.url %>
+              <% end %>  
+            </td>
             <td class="col-sm-4 col-md-2"><%= place.name %></td>
             <td class="col-md-2 hidden-xs"><%= place.latitude %></td>
             <td class="col-md-2 hidden-xs"><%= place.longitude %></td>
