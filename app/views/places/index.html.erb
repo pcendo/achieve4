@@ -12,8 +12,7 @@
         <tr>
           <th class="col-sm-4 col-md-1", style="font-size:1.5rem; text-align:center;">作者</th>
           <th class="col-sm-4 col-md-2", style="font-size:1.5rem; text-align:center;">Name</th>
-          <th class="col-md-2 hidden-xs", style="font-size:1.5rem; text-align:center;">Latitude</th>
-          <th class="col-md-2 hidden-xs", style="font-size:1.5rem; text-align:center;">Longitude</th>
+          <th class="col-md-4 hidden-xs", style="font-size:1.5rem; text-align:center;">日程</th>
           <th class="col-md-3 hidden-xs", style="font-size:1.5rem; text-align:center;">Address</th>
           <th class="col-sm-2 col-md-1", style="font-size:1.5rem; text-align:center;">メニュー</th>
           <th class="col-sm-2 col-md-1", style="font-size:1.5rem; text-align:center;">""</th>
@@ -33,8 +32,7 @@
               <% end %>  
             </td>
             <td class="col-sm-4 col-md-2"><%= place.name %></td>
-            <td class="col-md-2 hidden-xs"><%= place.latitude %></td>
-            <td class="col-md-2 hidden-xs"><%= place.longitude %></td>
+            <td class="col-md-4 hidden-xs"><%= place.start_date %>～<%= place.last_date %></td>
             <td class="col-md-3 hidden-xs"><%= place.address %></td>
             <td class="col-sm-2 col-md-1">
               <% if place.user_id == current_user.id %>
