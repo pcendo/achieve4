@@ -7,7 +7,7 @@
 <div class="container">
 <h3>行楽地は見つかったかな?</h3>
 
-<div class="col-md-12">
+<div class="col-md-12" style="height: 1000px">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -32,7 +32,7 @@
   </table>
 
 
-  <div class="map_container">
+  <div class="map_container" style="width: 70%">
     <div id="map" class="map_canvas"></div>
   </div>
 
@@ -46,7 +46,7 @@
     });
   </script>
 
-<h3>希望の場所が見つかったら、日程を入力して</h3>
+  <h3>希望の場所が見つかったら、日程を入力して</h3>
 
     <%= form_with( model: Place.new, url: places_path, local: true ) do |form| %>
 
@@ -60,23 +60,12 @@
         <%= form.hidden_field :user_id, :value => current_user.id %>
 
       <div class="form-group">
-        <%= form.label t('label.schedule') %>
-        <div class="input-group form-control" >
-          <%= form.date_select(
-              :start_date,
-              use_month_numbers: true,
-              start_year: 1950,
-              end_year: (Time.now.year),
-              default: Date.new(2018,1,1),
-              date_separator: '/') %>
-          <span>- to -</span>
-          <%= form.date_select(
-              :last_date,
-              use_month_numbers: true,
-              start_year: 1950,
-              end_year: (Time.now.year),
-              default: Date.new(2018,1,1),
-              date_separator: '/') %>
+        <div class="col-sm-6">
+          <div class="input-group input-daterange">
+              <%= form.text_field :start_date, class: 'form-control', id: 'datetimepicker1' %>
+            <div class="input-group-addon">to</div>
+              <%= form.text_field :last_date, class: 'form-control', id: 'datetimepicker2' %>
+          </div>
         </div>
       </div>
 
@@ -84,6 +73,31 @@
         <%= form.submit "行楽地を登録する", :class => "btn btn-primary" %>
       </div>
     <% end %>
+
+    <script type="text/javascript">
+      $('.input-daterange input').each(function() {
+          $(this).datetimepicker({
+            format: 'YYYY/MM/DD',
+        sideBySide: true,
+        widgetPositioning: {
+            horizontal: 'left',
+            vertical: 'bottom'
+        }
+          });
+      });
+      $(function () {
+        $('#datetimepicker1').datetimepicker();
+        $('#datetimepicker2').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker1").on("dp.change", function (e) {
+            $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker2").on("dp.change", function (e) {
+            $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+        });
+      });
+    </script>
   
     <button type="button" class="btn pull-right btn-lg btn-default">
       <%= link_to 'Back', new_place_path %>
